@@ -47,6 +47,6 @@ jobs:
        uses: Cecilapp/GitHub-Pages-deploy@master
        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
+       with:
           email: alex@khamutov.ru
           build_dir: _book/
