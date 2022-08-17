@@ -16,7 +16,7 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
           image: ghcr.io/khamutov/sim_book:main
-          options: -v ${{ github.workspace }}::/build/input
+          options: -v ${{ github.workspace }}:/build/input
       - uses: actions/upload-artifact@v1
         with:
           name: _book
