@@ -10,7 +10,13 @@ jobs:
     name: Render-Book
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - name: Check out the repo
+        uses: actions/checkout@v1
+      - name: Run the build process with Docker
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ghcr.io/khamutov/sim_book:main
+          options: -v ${{ github.workspace }}::/build/input
       - uses: actions/upload-artifact@v1
         with:
           name: _book
