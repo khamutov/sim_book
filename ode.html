@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Глава 2 Численное решение ОДУ | Sim Book2</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Глава 2 Численное решение ОДУ | Sim Book2" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="github-repo" content="khamutov/sim_book" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Глава 2 Численное решение ОДУ | Sim Book2" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Alex Khamutov" />
+
+
+<meta name="date" content="2022-08-17" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="literature.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2" data-path="ode.html"><a href="ode.html"><i class="fa fa-check"></i><b>2</b> Численное решение ОДУ</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="ode.html"><a href="ode.html#что-такое-оду."><i class="fa fa-check"></i><b>2.1</b> Что такое ОДУ.</a></li>
+<li class="chapter" data-level="2.2" data-path="ode.html"><a href="ode.html#свободное-падение-тела-без-сопротивления."><i class="fa fa-check"></i><b>2.2</b> Свободное падение тела без сопротивления.</a></li>
+<li class="chapter" data-level="2.3" data-path="ode.html"><a href="ode.html#улучшаем-код"><i class="fa fa-check"></i><b>2.3</b> Улучшаем код</a></li>
+<li class="chapter" data-level="2.4" data-path="ode.html"><a href="ode.html#задача-о-математическом-маятнике"><i class="fa fa-check"></i><b>2.4</b> Задача о математическом маятнике</a></li>
+<li class="chapter" data-level="2.5" data-path="ode.html"><a href="ode.html#метод-рунге-кутты"><i class="fa fa-check"></i><b>2.5</b> Метод Рунге-Кутты</a></li>
+<li class="chapter" data-level="2.6" data-path="ode.html"><a href="ode.html#решение-оду-с-помозью-scipy"><i class="fa fa-check"></i><b>2.6</b> Решение ОДУ с помозью SciPy</a></li>
+<li class="chapter" data-level="2.7" data-path="ode.html"><a href="ode.html#почему-бы-не-использовать-аналитическую-форму-зачем-эти-приседания"><i class="fa fa-check"></i><b>2.7</b> Почему бы не использовать аналитическую форму? Зачем эти приседания?</a></li>
+<li class="chapter" data-level="2.8" data-path="ode.html"><a href="ode.html#stiffness-жесткость"><i class="fa fa-check"></i><b>2.8</b> stiffness (жесткость)</a></li>
+<li class="chapter" data-level="2.9" data-path="ode.html"><a href="ode.html#многошаговые-методы"><i class="fa fa-check"></i><b>2.9</b> Многошаговые методы</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>3</b> Literature</a></li>
+<li class="chapter" data-level="4" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>4</b> Methods</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="methods.html"><a href="methods.html#math-example"><i class="fa fa-check"></i><b>4.1</b> math example</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>5</b> Applications</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>5.1</b> Example one</a></li>
+<li class="chapter" data-level="5.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>5.2</b> Example two</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>6</b> Final Words</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Sim Book2</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ode" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Глава 2</span> Численное решение ОДУ<a href="ode.html#ode" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Численное интегрирование - техника приблизительного (аппроксимированного) решения обыкновенных дифференциальных уравнений (ОДУ, англ. ODE).использу Инженеры решают ОДУ при моделировании физических явлений и законов</p>
+<div id="что-такое-оду." class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Что такое ОДУ.<a href="ode.html#что-такое-оду." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>ОДУ - это уравнения вида</p>
+<p><span class="math display" id="eq:ode-definition">\[
+F(x,y,y^\prime,...,y^{(n-1)}) = y^{(n)}
+\tag{2.1}
+\]</span></p>
+<p>такая форма записи еще называется явным обыкновенным дифференциальным уравнением порядка <span class="math inline">\(n\)</span>: старшая производная выражена через производные меньших порядков.</p>
+<p>Например, ОДУ падения тела без сопротивления воздуха будет:</p>
+<p><span class="math display">\[
+\frac{d^2x}{dt^2} = g
+\]</span></p>
+<p>где:</p>
+<ul>
+<li>x - перемещение тела</li>
+<li>g - ускорение свободного падения</li>
+</ul>
+</div>
+<div id="свободное-падение-тела-без-сопротивления." class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Свободное падение тела без сопротивления.<a href="ode.html#свободное-падение-тела-без-сопротивления." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Уравнение свободного падения в аналитической форме выглядит как:</p>
+<p><span class="math display">\[
+h = h_0 - \frac{gt^2}{2}
+\]</span></p>
+<p>где,</p>
+<ul>
+<li><span class="math inline">\(h_0\)</span> - изначальная высота</li>
+<li><span class="math inline">\(h\)</span> - высота тела в момент времени <span class="math inline">\(t\)</span></li>
+</ul>
+<p>Построим график высоты в каждый момент времени:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="ode.html#cb2-1" aria-hidden="true"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="ode.html#cb2-2" aria-hidden="true"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-3"><a href="ode.html#cb2-3" aria-hidden="true"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-4"><a href="ode.html#cb2-4" aria-hidden="true"></a></span>
+<span id="cb2-5"><a href="ode.html#cb2-5" aria-hidden="true"></a>_START_H <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb2-6"><a href="ode.html#cb2-6" aria-hidden="true"></a>_GRAVITY <span class="op">=</span> <span class="fl">9.8</span> <span class="co"># m/s^2</span></span>
+<span id="cb2-7"><a href="ode.html#cb2-7" aria-hidden="true"></a></span>
+<span id="cb2-8"><a href="ode.html#cb2-8" aria-hidden="true"></a><span class="co"># возвращает высоту тела в момент времени t</span></span>
+<span id="cb2-9"><a href="ode.html#cb2-9" aria-hidden="true"></a><span class="kw">def</span> analytic_solution_h(t):</span>
+<span id="cb2-10"><a href="ode.html#cb2-10" aria-hidden="true"></a>    <span class="cf">return</span> _START_H <span class="op">-</span> _GRAVITY <span class="op">*</span> t<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="dv">2</span></span>
+<span id="cb2-11"><a href="ode.html#cb2-11" aria-hidden="true"></a></span>
+<span id="cb2-12"><a href="ode.html#cb2-12" aria-hidden="true"></a><span class="kw">def</span> analytic_solution_v(t):</span>
+<span id="cb2-13"><a href="ode.html#cb2-13" aria-hidden="true"></a>    <span class="cf">return</span> _GRAVITY <span class="op">*</span> t</span>
+<span id="cb2-14"><a href="ode.html#cb2-14" aria-hidden="true"></a></span>
+<span id="cb2-15"><a href="ode.html#cb2-15" aria-hidden="true"></a><span class="co"># шаг времени 0.1 секунды</span></span>
+<span id="cb2-16"><a href="ode.html#cb2-16" aria-hidden="true"></a>x <span class="op">=</span> np.linspace(start<span class="op">=</span><span class="dv">0</span>, stop<span class="op">=</span><span class="dv">10</span>, num<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb2-17"><a href="ode.html#cb2-17" aria-hidden="true"></a>y_analytic <span class="op">=</span> np.vectorize(analytic_solution_h)(x)</span>
+<span id="cb2-18"><a href="ode.html#cb2-18" aria-hidden="true"></a>plt.plot(x, y_analytic)</span>
+<span id="cb2-19"><a href="ode.html#cb2-19" aria-hidden="true"></a>plt.show()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Дифференциальная форма выглядит как:</p>
+<p><span class="math display" id="eq:free-fall-eq">\[
+  \frac{dv}{dt} = g
+  \tag{2.2}
+\]</span></p>
+<p>где:</p>
+<ul>
+<li><span class="math inline">\(v\)</span> - скорость</li>
+<li><span class="math inline">\(t\)</span> - время</li>
+<li><span class="math inline">\(g\)</span> - ускорение свободного падения</li>
+</ul>
+<p>которое можно интуитивно прочитать следующим образом:</p>
+<ul>
+<li><span class="math inline">\(d\)</span> - это дельта, изменение</li>
+<li>изменение скорости (<span class="math inline">\(dv\)</span>) за какой-то промежуток времени (<span class="math inline">\(dt\)</span>) это ускорение свободного падения или изменение скорости равно произведению ускорения свободного падения <span class="math inline">\(g\)</span> на <span class="math inline">\(dt\)</span>.</li>
+</ul>
+<p>При этом скорость по определению это отношение расстояния ко времени:</p>
+<p><span class="math display">\[
+\frac{dx}{dt} = v
+\]</span></p>
+<p>Совмещая эти два уравнения получаем систему дифференциальных уравнений:</p>
+<p><span class="math display">\[
+\begin{cases}
+\frac{dv}{dt} = g \\
+\frac{dx}{dt} = v
+\end{cases}
+\]</span></p>
+<p>Попробуем решить эту систему используя интуицию. Если <span class="math inline">\(\Delta t\)</span> это малое приращение (через <span class="math inline">\(\Delta\)</span> я буду обозначать <em>конечное</em> приращение - такое, которое мы можем выразить в числах; я это делаю для консистентности, чтобы отличать от бесконечно малого <span class="math inline">\(d\)</span> в производной), то мы можем вычислить изменения скорости <span class="math inline">\(\Delta v\)</span> умножением <span class="math inline">\(g\cdot \Delta t\)</span>. Таким образом:</p>
+<p><span class="math display">\[
+\begin{cases}
+\Delta v = g \Delta t \\
+\Delta x = v \Delta t
+\end{cases}
+\]</span></p>
+<p>В формуле выше есть только <em>изменения</em>, для вычисления потребуются промежуточные переменные для хранения абсолютных значений скорости и высоты.</p>
+<p><span class="math display">\[
+\begin{cases}
+\Delta v = g \Delta t \\
+\Delta x = v \Delta t \\
+v_{n+1} = v_{n} + \Delta v \\
+x_{n+1} = x_{n} + \Delta x
+\end{cases}
+\]</span></p>
+<p>Заметим, что достаточно запоминать только абсолютные значения, а изменения значений нужны только для вычисления новых абсолютных значений. Например, чтобы вычислить следующее значение скорости <span class="math inline">\(v_{n+1}\)</span>, с предыдущего шага нужно знать только <span class="math inline">\(v_n\)</span>, а <span class="math inline">\(\Delta v\)</span> требуется только для промежуточных вычислений. Напишем код для одного шага вычислений:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="ode.html#cb3-1" aria-hidden="true"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass</span>
+<span id="cb3-2"><a href="ode.html#cb3-2" aria-hidden="true"></a><span class="im">import</span> copy</span>
+<span id="cb3-3"><a href="ode.html#cb3-3" aria-hidden="true"></a></span>
+<span id="cb3-4"><a href="ode.html#cb3-4" aria-hidden="true"></a><span class="at">@dataclass</span></span>
+<span id="cb3-5"><a href="ode.html#cb3-5" aria-hidden="true"></a><span class="kw">class</span> State:</span>
+<span id="cb3-6"><a href="ode.html#cb3-6" aria-hidden="true"></a>  height: <span class="bu">float</span></span>
+<span id="cb3-7"><a href="ode.html#cb3-7" aria-hidden="true"></a>  velocity: <span class="bu">float</span></span>
+<span id="cb3-8"><a href="ode.html#cb3-8" aria-hidden="true"></a></span>
+<span id="cb3-9"><a href="ode.html#cb3-9" aria-hidden="true"></a><span class="kw">def</span> derived_solution(state: State, dt: <span class="bu">float</span>) <span class="op">-&gt;</span> State:</span>
+<span id="cb3-10"><a href="ode.html#cb3-10" aria-hidden="true"></a>    new_state <span class="op">=</span> copy.deepcopy(state)</span>
+<span id="cb3-11"><a href="ode.html#cb3-11" aria-hidden="true"></a></span>
+<span id="cb3-12"><a href="ode.html#cb3-12" aria-hidden="true"></a>    dV <span class="op">=</span> <span class="op">-</span> _GRAVITY <span class="op">*</span> dt</span>
+<span id="cb3-13"><a href="ode.html#cb3-13" aria-hidden="true"></a>    new_state.velocity <span class="op">+=</span> dV</span>
+<span id="cb3-14"><a href="ode.html#cb3-14" aria-hidden="true"></a></span>
+<span id="cb3-15"><a href="ode.html#cb3-15" aria-hidden="true"></a>    dH <span class="op">=</span> state.velocity <span class="op">*</span> dt</span>
+<span id="cb3-16"><a href="ode.html#cb3-16" aria-hidden="true"></a>    new_state.height <span class="op">+=</span> dH</span>
+<span id="cb3-17"><a href="ode.html#cb3-17" aria-hidden="true"></a></span>
+<span id="cb3-18"><a href="ode.html#cb3-18" aria-hidden="true"></a>    <span class="cf">return</span> new_state</span></code></pre></div>
+<p>Вычислим значения высоты на каждом промежутке времени:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="ode.html#cb4-1" aria-hidden="true"></a>prev_t <span class="op">=</span> x[<span class="dv">0</span>]</span>
+<span id="cb4-2"><a href="ode.html#cb4-2" aria-hidden="true"></a>state <span class="op">=</span> State(height<span class="op">=</span>_START_H, velocity<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb4-3"><a href="ode.html#cb4-3" aria-hidden="true"></a></span>
+<span id="cb4-4"><a href="ode.html#cb4-4" aria-hidden="true"></a>y_derived_list <span class="op">=</span> <span class="bu">list</span>()</span>
+<span id="cb4-5"><a href="ode.html#cb4-5" aria-hidden="true"></a><span class="cf">for</span> t <span class="kw">in</span> x:</span>
+<span id="cb4-6"><a href="ode.html#cb4-6" aria-hidden="true"></a>    dt <span class="op">=</span> t <span class="op">-</span> prev_t</span>
+<span id="cb4-7"><a href="ode.html#cb4-7" aria-hidden="true"></a>    state <span class="op">=</span> derived_solution(state, dt)</span>
+<span id="cb4-8"><a href="ode.html#cb4-8" aria-hidden="true"></a>    prev_t <span class="op">=</span> t</span>
+<span id="cb4-9"><a href="ode.html#cb4-9" aria-hidden="true"></a></span>
+<span id="cb4-10"><a href="ode.html#cb4-10" aria-hidden="true"></a>    y_derived_list.append(state.height)</span>
+<span id="cb4-11"><a href="ode.html#cb4-11" aria-hidden="true"></a></span>
+<span id="cb4-12"><a href="ode.html#cb4-12" aria-hidden="true"></a>plt.plot(x, y_derived_list)</span>
+<span id="cb4-13"><a href="ode.html#cb4-13" aria-hidden="true"></a>plt.show()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-5-3.png" width="672" /></p>
+<p>Выглядит похожим на график решения в аналитической форме.
+Проверим финальные значения:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="ode.html#cb5-1" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;y_analytic&quot;</span>, y_analytic[<span class="op">-</span><span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## y_analytic 509.99999999999994</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="ode.html#cb7-1" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;y_derived_list&quot;</span>, y_derived_list[<span class="op">-</span><span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## y_derived_list 514.949494949495</code></pre>
+<p>В последнем решении где-то потерялось 5 метров.</p>
+<p>Проанализируем решение:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="ode.html#cb9-1" aria-hidden="true"></a>dV <span class="op">=</span> <span class="op">-</span> _GRAVITY <span class="op">*</span> dt     <span class="co"># &lt;-- изменение скорости</span></span>
+<span id="cb9-2"><a href="ode.html#cb9-2" aria-hidden="true"></a>new_state.velocity <span class="op">+=</span> dV <span class="co"># &lt;-- новая скорость</span></span>
+<span id="cb9-3"><a href="ode.html#cb9-3" aria-hidden="true"></a></span>
+<span id="cb9-4"><a href="ode.html#cb9-4" aria-hidden="true"></a>dH <span class="op">=</span> state.velocity <span class="op">*</span> dt <span class="co"># &lt;-- вычисляем изменение высоты используя скорость с предыдущего шага</span></span>
+<span id="cb9-5"><a href="ode.html#cb9-5" aria-hidden="true"></a>new_state.height <span class="op">+=</span> dH   <span class="co"># &lt;-- новая высота</span></span></code></pre></div>
+<p>Изменение высоты считается используя значение скорости с <em>предыдущего</em> шага. Можно использовать новое значение скорости, но это тоже не поможет, потому что скорость меняется на всем промежутке <code>dt</code>. Первое решение: уменьшим шаг <code>dt</code> и ошибка станет меньше за счет уменьшения ошибки от изменения скорости. Проверим:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="ode.html#cb10-1" aria-hidden="true"></a>prev_t <span class="op">=</span> x[<span class="dv">0</span>]</span>
+<span id="cb10-2"><a href="ode.html#cb10-2" aria-hidden="true"></a>state <span class="op">=</span> State(height<span class="op">=</span>_START_H, velocity<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb10-3"><a href="ode.html#cb10-3" aria-hidden="true"></a></span>
+<span id="cb10-4"><a href="ode.html#cb10-4" aria-hidden="true"></a>y_derived_list_fine <span class="op">=</span> <span class="bu">list</span>()</span>
+<span id="cb10-5"><a href="ode.html#cb10-5" aria-hidden="true"></a><span class="co"># шаг времени 0.01 секунды</span></span>
+<span id="cb10-6"><a href="ode.html#cb10-6" aria-hidden="true"></a>fine_x <span class="op">=</span> np.linspace(start<span class="op">=</span><span class="dv">0</span>, stop<span class="op">=</span><span class="dv">10</span>, num<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb10-7"><a href="ode.html#cb10-7" aria-hidden="true"></a><span class="cf">for</span> t <span class="kw">in</span> fine_x:</span>
+<span id="cb10-8"><a href="ode.html#cb10-8" aria-hidden="true"></a>    dt <span class="op">=</span> t <span class="op">-</span> prev_t</span>
+<span id="cb10-9"><a href="ode.html#cb10-9" aria-hidden="true"></a>    state <span class="op">=</span> derived_solution(state, dt)</span>
+<span id="cb10-10"><a href="ode.html#cb10-10" aria-hidden="true"></a>    prev_t <span class="op">=</span> t</span>
+<span id="cb10-11"><a href="ode.html#cb10-11" aria-hidden="true"></a></span>
+<span id="cb10-12"><a href="ode.html#cb10-12" aria-hidden="true"></a>    y_derived_list_fine.append(state.height)</span>
+<span id="cb10-13"><a href="ode.html#cb10-13" aria-hidden="true"></a></span>
+<span id="cb10-14"><a href="ode.html#cb10-14" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;y_derived_list_fine&quot;</span>, y_derived_list_fine[<span class="op">-</span><span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## y_derived_list_fine 510.4904904904926</code></pre>
+<p>Стало лучше, с уменьшением шага в 10 раз (увеличением со 100 шагов до 1000) ошибка уменьшилась до менее 1 метра. При этом требуется сделать в 10 раз больше вычислений. Попробуем учесть изменение скорости внутри <code>dt</code>. Для этого возьмем среднее арифметическое между скоростью с предыдущего и текущего шагов.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="ode.html#cb12-1" aria-hidden="true"></a><span class="kw">def</span> derived_solution_v2(state, dt):</span>
+<span id="cb12-2"><a href="ode.html#cb12-2" aria-hidden="true"></a>    new_state <span class="op">=</span> copy.deepcopy(state)</span>
+<span id="cb12-3"><a href="ode.html#cb12-3" aria-hidden="true"></a></span>
+<span id="cb12-4"><a href="ode.html#cb12-4" aria-hidden="true"></a>    dV <span class="op">=</span> <span class="op">-</span> _GRAVITY <span class="op">*</span> dt</span>
+<span id="cb12-5"><a href="ode.html#cb12-5" aria-hidden="true"></a>    new_state.velocity <span class="op">+=</span> dV</span>
+<span id="cb12-6"><a href="ode.html#cb12-6" aria-hidden="true"></a></span>
+<span id="cb12-7"><a href="ode.html#cb12-7" aria-hidden="true"></a>    <span class="co"># считаем изменение высоты от среднеарифметического между новым и старым</span></span>
+<span id="cb12-8"><a href="ode.html#cb12-8" aria-hidden="true"></a>    <span class="co"># значениями скорости</span></span>
+<span id="cb12-9"><a href="ode.html#cb12-9" aria-hidden="true"></a>    dH <span class="op">=</span> (<span class="fl">0.5</span> <span class="op">*</span> state.velocity <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> new_state.velocity) <span class="op">*</span> dt</span>
+<span id="cb12-10"><a href="ode.html#cb12-10" aria-hidden="true"></a>    new_state.height <span class="op">+=</span> dH</span>
+<span id="cb12-11"><a href="ode.html#cb12-11" aria-hidden="true"></a></span>
+<span id="cb12-12"><a href="ode.html#cb12-12" aria-hidden="true"></a>    <span class="cf">return</span> new_state</span>
+<span id="cb12-13"><a href="ode.html#cb12-13" aria-hidden="true"></a></span>
+<span id="cb12-14"><a href="ode.html#cb12-14" aria-hidden="true"></a>prev_t <span class="op">=</span> x[<span class="dv">0</span>]</span>
+<span id="cb12-15"><a href="ode.html#cb12-15" aria-hidden="true"></a>state <span class="op">=</span> State(height<span class="op">=</span>_START_H, velocity<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb12-16"><a href="ode.html#cb12-16" aria-hidden="true"></a></span>
+<span id="cb12-17"><a href="ode.html#cb12-17" aria-hidden="true"></a>y_derived_list_v2 <span class="op">=</span> <span class="bu">list</span>()</span>
+<span id="cb12-18"><a href="ode.html#cb12-18" aria-hidden="true"></a><span class="cf">for</span> t <span class="kw">in</span> x:</span>
+<span id="cb12-19"><a href="ode.html#cb12-19" aria-hidden="true"></a>    dt <span class="op">=</span> t <span class="op">-</span> prev_t</span>
+<span id="cb12-20"><a href="ode.html#cb12-20" aria-hidden="true"></a>    state <span class="op">=</span> derived_solution_v2(state, dt)</span>
+<span id="cb12-21"><a href="ode.html#cb12-21" aria-hidden="true"></a>    prev_t <span class="op">=</span> t</span>
+<span id="cb12-22"><a href="ode.html#cb12-22" aria-hidden="true"></a></span>
+<span id="cb12-23"><a href="ode.html#cb12-23" aria-hidden="true"></a>    y_derived_list_v2.append(state.height)</span>
+<span id="cb12-24"><a href="ode.html#cb12-24" aria-hidden="true"></a></span>
+<span id="cb12-25"><a href="ode.html#cb12-25" aria-hidden="true"></a>plt.plot(x, y_derived_list_v2)</span>
+<span id="cb12-26"><a href="ode.html#cb12-26" aria-hidden="true"></a>plt.show()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-8-5.png" width="672" /></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="ode.html#cb13-1" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;y_analytic&quot;</span>, y_analytic[<span class="op">-</span><span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## y_analytic 509.99999999999994</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="ode.html#cb15-1" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;y_derived_list&quot;</span>, y_derived_list[<span class="op">-</span><span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## y_derived_list 514.949494949495</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="ode.html#cb17-1" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;y_derived_list_v2&quot;</span>, y_derived_list_v2[<span class="op">-</span><span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## y_derived_list_v2 509.99999999999994</code></pre>
+<p>Получилось точно такое же значение как и для аналитического решения.</p>
+<p>Разберемся почему так получается. Вообще говоря, графически интегрирование - это поиск площади под кривой. Представим себе движение тела с постоянной скоростью. Скорость - это производная от пройденного расстояния. Или наоборот: расстояние это интеграл от скорости.
+Если автомобиль едет со скоростью 80 км/ч, то за 2 часа проедет 160 км. Таким образом пройденное расстояние - это произведение <span class="math inline">\(v\cdot dt\)</span>.</p>
+<div class="figure">
+<img src="assets/images/ode/constant_velocity.png" alt="График постоянной скорости." width="240" />
+<p class="caption">
+(#fig:constant_velocity)График постоянной скорости.
+</p>
+</div>
+<p>А <span class="math inline">\(v\cdot dt\)</span> ни что иное как площадь закрашенного прямоугольника под графиком.</p>
+<p>Теперь вернемся к свободному падению. Скорость будет наклонной прямой, потому что на тело действует постоянная сила земного притяжения и скорость равномерно увеличивается на 9.8 м/с<sup>2</sup>, т.е. каждую секунду скорость становится на 9.8 м/с больше.</p>
+<div class="figure">
+<img src="assets/images/ode/velocity_vs_time.png" alt="График изменения скорости во времени." width="240" />
+<p class="caption">
+(#fig:velocity_vs_time)График изменения скорости во времени.
+</p>
+</div>
+<p>Чтобы найти пройденное расстояние - нужно найти площадь под графиком. Первым методом, который мы использовали - брали скорость в начальный момент времени и умножали на приращение времени.</p>
+<div class="figure">
+<img src="assets/images/ode/rectangle_method.png" alt="Метод прямоугольников." width="400" />
+<p class="caption">
+(#fig:rectangle_method)Метод прямоугольников.
+</p>
+</div>
+<p>Видно, что мы захватываем не всю площадь, а только ее часть. Если же будет использовать конечную точку - то наоборот будем ошибаться в больную сторону. Такой метод интегрирования называется методом прямоугольников.</p>
+<p>Второй метод, которым мы решали - брали среднее между начальной и конечной скоростями и умножали на приращение времени. Таким образом ищется площадь трапеции, а метод называется соответственно методом трапеций.</p>
+<div class="figure">
+<img src="assets/images/ode/trapezoidal_method.png" alt="Метод трапеций." width="400" />
+<p class="caption">
+(#fig:trapezoidal_method)Метод трапеций.
+</p>
+</div>
+<p>В нашем случае это идеально сработало, потому что трапеции точно описывают функцию линейного приращения, как в случае с ускорением свободного падения. Но что если закон изменения не будет линейным?</p>
+</div>
+<div id="улучшаем-код" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Улучшаем код<a href="ode.html#улучшаем-код" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Прежде чем продолжим с более сложными методами, приберемся в коде. Вернемся к первому методу и заметим, что каждый результат стейта зависит от <code>dt</code>:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="ode.html#cb19-1" aria-hidden="true"></a><span class="kw">def</span> derived_solution(state: State, dt: <span class="bu">float</span>) <span class="op">-&gt;</span> State:</span>
+<span id="cb19-2"><a href="ode.html#cb19-2" aria-hidden="true"></a>    new_state <span class="op">=</span> copy.deepcopy(state)</span>
+<span id="cb19-3"><a href="ode.html#cb19-3" aria-hidden="true"></a></span>
+<span id="cb19-4"><a href="ode.html#cb19-4" aria-hidden="true"></a>    dV <span class="op">=</span> <span class="op">-</span> _GRAVITY <span class="op">*</span> dt      <span class="op">&lt;--</span> умножаем на dt</span>
+<span id="cb19-5"><a href="ode.html#cb19-5" aria-hidden="true"></a>    new_state.velocity <span class="op">+=</span> dV</span>
+<span id="cb19-6"><a href="ode.html#cb19-6" aria-hidden="true"></a></span>
+<span id="cb19-7"><a href="ode.html#cb19-7" aria-hidden="true"></a>    dH <span class="op">=</span> state.velocity <span class="op">*</span> dt  <span class="op">&lt;--</span> умножаем на dt</span>
+<span id="cb19-8"><a href="ode.html#cb19-8" aria-hidden="true"></a>    new_state.height <span class="op">+=</span> dH</span>
+<span id="cb19-9"><a href="ode.html#cb19-9" aria-hidden="true"></a></span>
+<span id="cb19-10"><a href="ode.html#cb19-10" aria-hidden="true"></a>    <span class="cf">return</span> new_state</span></code></pre></div>
+<p>перепишем убрав промежуточные переменные</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="ode.html#cb20-1" aria-hidden="true"></a><span class="kw">def</span> derived_solution(state: State, dt: <span class="bu">float</span>) <span class="op">-&gt;</span> State:</span>
+<span id="cb20-2"><a href="ode.html#cb20-2" aria-hidden="true"></a>    new_state <span class="op">=</span> copy.deepcopy(state)</span>
+<span id="cb20-3"><a href="ode.html#cb20-3" aria-hidden="true"></a></span>
+<span id="cb20-4"><a href="ode.html#cb20-4" aria-hidden="true"></a>    new_state.velocity <span class="op">+=</span> <span class="op">-</span> _GRAVITY <span class="op">*</span> dt</span>
+<span id="cb20-5"><a href="ode.html#cb20-5" aria-hidden="true"></a>    new_state.height <span class="op">+=</span> state.velocity <span class="op">*</span> dt</span>
+<span id="cb20-6"><a href="ode.html#cb20-6" aria-hidden="true"></a></span>
+<span id="cb20-7"><a href="ode.html#cb20-7" aria-hidden="true"></a>    <span class="cf">return</span> new_state</span></code></pre></div>
+<p>здесь видно что мы делаем что-то похожее на:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+velocity_1 \\
+height_1
+\end{bmatrix} = \begin{bmatrix}
+velocity_0 \\
+height_0
+\end{bmatrix} + \begin{bmatrix}
+- gravity \\
+velocity_0
+\end{bmatrix} * dt
+\]</span></p>
+<p>или</p>
+<p><span class="math display">\[
+state_1 = state_0 + dydt * dt
+\]</span></p>
+<p>где <span class="math inline">\(dydt\)</span> - это вычисление производной в точке.</p>
+<p>Таким образом - каждый член нового стейта - это сумма предыдущего стейта и производной умноженной на время.
+Перепишем код с учетом этих знаний: выделим отдельно вычисление производной и непосредственно интегрирование.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="ode.html#cb21-1" aria-hidden="true"></a>_VELOCITY_IDX <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb21-2"><a href="ode.html#cb21-2" aria-hidden="true"></a>_HEIGHT_IDX <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb21-3"><a href="ode.html#cb21-3" aria-hidden="true"></a></span>
+<span id="cb21-4"><a href="ode.html#cb21-4" aria-hidden="true"></a><span class="co"># state = [velocity, height]</span></span>
+<span id="cb21-5"><a href="ode.html#cb21-5" aria-hidden="true"></a><span class="kw">def</span> freefall_dydt(state):</span>
+<span id="cb21-6"><a href="ode.html#cb21-6" aria-hidden="true"></a>    <span class="cf">return</span> np.array([</span>
+<span id="cb21-7"><a href="ode.html#cb21-7" aria-hidden="true"></a>        <span class="op">-</span> _GRAVITY,</span>
+<span id="cb21-8"><a href="ode.html#cb21-8" aria-hidden="true"></a>        state[_VELOCITY_IDX]</span>
+<span id="cb21-9"><a href="ode.html#cb21-9" aria-hidden="true"></a>    ])</span>
+<span id="cb21-10"><a href="ode.html#cb21-10" aria-hidden="true"></a></span>
+<span id="cb21-11"><a href="ode.html#cb21-11" aria-hidden="true"></a><span class="kw">def</span> euler_integrate(state, t, f_dydt):</span>
+<span id="cb21-12"><a href="ode.html#cb21-12" aria-hidden="true"></a>    result <span class="op">=</span> <span class="bu">list</span>()</span>
+<span id="cb21-13"><a href="ode.html#cb21-13" aria-hidden="true"></a>    prev_t <span class="op">=</span> t[<span class="dv">0</span>]</span>
+<span id="cb21-14"><a href="ode.html#cb21-14" aria-hidden="true"></a>    <span class="cf">for</span> t_current <span class="kw">in</span> t:</span>
+<span id="cb21-15"><a href="ode.html#cb21-15" aria-hidden="true"></a>        dt <span class="op">=</span> t_current <span class="op">-</span> prev_t</span>
+<span id="cb21-16"><a href="ode.html#cb21-16" aria-hidden="true"></a>        dydt <span class="op">=</span> f_dydt(state)</span>
+<span id="cb21-17"><a href="ode.html#cb21-17" aria-hidden="true"></a>        state <span class="op">=</span> state <span class="op">+</span> dydt <span class="op">*</span> dt</span>
+<span id="cb21-18"><a href="ode.html#cb21-18" aria-hidden="true"></a>        prev_t <span class="op">=</span> t_current</span>
+<span id="cb21-19"><a href="ode.html#cb21-19" aria-hidden="true"></a></span>
+<span id="cb21-20"><a href="ode.html#cb21-20" aria-hidden="true"></a>        result.append(state)</span>
+<span id="cb21-21"><a href="ode.html#cb21-21" aria-hidden="true"></a></span>
+<span id="cb21-22"><a href="ode.html#cb21-22" aria-hidden="true"></a>    <span class="cf">return</span> np.array(result)</span>
+<span id="cb21-23"><a href="ode.html#cb21-23" aria-hidden="true"></a></span>
+<span id="cb21-24"><a href="ode.html#cb21-24" aria-hidden="true"></a>euler_heights <span class="op">=</span> euler_integrate(np.array([<span class="dv">0</span>, _START_H]), x, freefall_dydt)[:,_HEIGHT_IDX]</span>
+<span id="cb21-25"><a href="ode.html#cb21-25" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;y_analytic&quot;</span>, y_analytic[<span class="op">-</span><span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## y_analytic 509.99999999999994</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="ode.html#cb23-1" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;y_derived_list&quot;</span>, y_derived_list[<span class="op">-</span><span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## y_derived_list 514.949494949495</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="ode.html#cb25-1" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;y_derived_list_v2&quot;</span>, y_derived_list_v2[<span class="op">-</span><span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## y_derived_list_v2 509.99999999999994</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="ode.html#cb27-1" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;euler_heights&quot;</span>, euler_heights[<span class="op">-</span><span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## euler_heights 514.949494949495</code></pre>
+<p>Такой метод интегрирования называется интегрированием по методу Эйлера. Преимущество такого подхода - мы отделили вычисление производной в точке от интегрирования. Сейчас увидим зачем.</p>
+<p>Метод Эйлера - самый простой способ интегрирования ОДУ. Попробуем сделать модифицированный метод Эйлера.</p>
+<p><span class="math display">\[
+Прогноз:\\
+\tilde{y_i} = y_{i-1} + (x_i - x_{i-1})f(x_{i-1}, y_{i-1}) \\
+Коррекция:\\
+y_i = y_{i-1} + (x_i - x_{i-1})\frac{f(x_{i-1},y_{i-1}) + f(x_i, \tilde{y_i})}{2}
+\]</span></p>
+<p>Нет смысла глубоко разбираться почему делается так, достаточно понять суть - мы вычисляем интеграл в два прохода: на первом делаем прогноз и потом пытаемся скорректировать ошибку используя значения прогноза.
+Чтобы реализовать этот метод нужно только переписать функцию интегрирования <code>euler_integrate</code>, а функция расчета производной <code>freefall_dydt</code> останется неизменной.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="ode.html#cb29-1" aria-hidden="true"></a><span class="kw">def</span> modified_euler_method(state, t, f_dydt):</span>
+<span id="cb29-2"><a href="ode.html#cb29-2" aria-hidden="true"></a>    result <span class="op">=</span> <span class="bu">list</span>()</span>
+<span id="cb29-3"><a href="ode.html#cb29-3" aria-hidden="true"></a>    prev_t <span class="op">=</span> t[<span class="dv">0</span>]</span>
+<span id="cb29-4"><a href="ode.html#cb29-4" aria-hidden="true"></a>    <span class="cf">for</span> t_current <span class="kw">in</span> t:</span>
+<span id="cb29-5"><a href="ode.html#cb29-5" aria-hidden="true"></a>        dt <span class="op">=</span> t_current <span class="op">-</span> prev_t</span>
+<span id="cb29-6"><a href="ode.html#cb29-6" aria-hidden="true"></a>        dydt_est <span class="op">=</span> f_dydt(state)</span>
+<span id="cb29-7"><a href="ode.html#cb29-7" aria-hidden="true"></a>        state_est <span class="op">=</span> state <span class="op">+</span> dydt_est <span class="op">*</span> dt</span>
+<span id="cb29-8"><a href="ode.html#cb29-8" aria-hidden="true"></a>        state <span class="op">=</span> state <span class="op">+</span> (f_dydt(state) <span class="op">+</span> f_dydt(state_est)) <span class="op">*</span> dt <span class="op">/</span> <span class="dv">2</span></span>
+<span id="cb29-9"><a href="ode.html#cb29-9" aria-hidden="true"></a>        prev_t <span class="op">=</span> t_current</span>
+<span id="cb29-10"><a href="ode.html#cb29-10" aria-hidden="true"></a></span>
+<span id="cb29-11"><a href="ode.html#cb29-11" aria-hidden="true"></a>        result.append(state)</span>
+<span id="cb29-12"><a href="ode.html#cb29-12" aria-hidden="true"></a></span>
+<span id="cb29-13"><a href="ode.html#cb29-13" aria-hidden="true"></a>    <span class="cf">return</span> np.array(result)</span>
+<span id="cb29-14"><a href="ode.html#cb29-14" aria-hidden="true"></a></span>
+<span id="cb29-15"><a href="ode.html#cb29-15" aria-hidden="true"></a>modified_euler_res <span class="op">=</span> modified_euler_method(np.array([<span class="dv">0</span>, _START_H]), x, freefall_dydt)[:,_HEIGHT_IDX]</span>
+<span id="cb29-16"><a href="ode.html#cb29-16" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;y_analytic&quot;</span>, y_analytic[<span class="op">-</span><span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## y_analytic 509.99999999999994</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="ode.html#cb31-1" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;y_derived_list&quot;</span>, y_derived_list[<span class="op">-</span><span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## y_derived_list 514.949494949495</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="ode.html#cb33-1" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;y_derived_list_v2&quot;</span>, y_derived_list_v2[<span class="op">-</span><span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## y_derived_list_v2 509.99999999999994</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="ode.html#cb35-1" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;euler_heights&quot;</span>, euler_heights[<span class="op">-</span><span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## euler_heights 514.949494949495</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="ode.html#cb37-1" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;modified_euler_res&quot;</span>, modified_euler_res[<span class="op">-</span><span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## modified_euler_res 509.99999999999994</code></pre>
+<p>У нас получилось точное значение, такое же как и в случае с аналитическим решением. Это успех! Модифицированный метод Эйлера с пересчетом имеет второй порядок точности и позволяет учитывать изменение скорости во времени.</p>
+</div>
+<div id="задача-о-математическом-маятнике" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Задача о математическом маятнике<a href="ode.html#задача-о-математическом-маятнике" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>TK добавить картинку с маятником и описать как это работает.</p>
+<p>Предыдущая задача была с линейным изменением скорости. Но что если вторая производная будет нелинейной? Возьмем задачу о математическом маятнике:</p>
+<p><span class="math display">\[
+\theta(t) = \theta_0 \cos({\sqrt{\frac{g}{l}}t})
+\]</span></p>
+<p>где:</p>
+<ul>
+<li><span class="math inline">\(\theta\)</span> - угол отклонения маятника</li>
+<li><span class="math inline">\(l\)</span> - длина подвеса</li>
+</ul>
+<p>Напишем аналитическое решение:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="ode.html#cb39-1" aria-hidden="true"></a><span class="im">import</span> math</span>
+<span id="cb39-2"><a href="ode.html#cb39-2" aria-hidden="true"></a></span>
+<span id="cb39-3"><a href="ode.html#cb39-3" aria-hidden="true"></a>PENDULUM_VAR_INITIAL_ANGLE <span class="op">=</span> math.pi<span class="op">/</span><span class="dv">60</span> <span class="co"># 3 degree in radians</span></span>
+<span id="cb39-4"><a href="ode.html#cb39-4" aria-hidden="true"></a>PENDULUM_VAR_LEN <span class="op">=</span> <span class="dv">1</span> <span class="co"># meter</span></span>
+<span id="cb39-5"><a href="ode.html#cb39-5" aria-hidden="true"></a></span>
+<span id="cb39-6"><a href="ode.html#cb39-6" aria-hidden="true"></a><span class="kw">def</span> pendulum_analytic(t):</span>
+<span id="cb39-7"><a href="ode.html#cb39-7" aria-hidden="true"></a>    theta_0, l <span class="op">=</span> PENDULUM_VAR_INITIAL_ANGLE, PENDULUM_VAR_LEN</span>
+<span id="cb39-8"><a href="ode.html#cb39-8" aria-hidden="true"></a>    theta <span class="op">=</span> theta_0 <span class="op">*</span> math.cos(math.sqrt(_GRAVITY<span class="op">/</span>l)<span class="op">*</span>t)</span>
+<span id="cb39-9"><a href="ode.html#cb39-9" aria-hidden="true"></a>    <span class="cf">return</span> theta</span>
+<span id="cb39-10"><a href="ode.html#cb39-10" aria-hidden="true"></a></span>
+<span id="cb39-11"><a href="ode.html#cb39-11" aria-hidden="true"></a>x <span class="op">=</span> np.linspace(start<span class="op">=</span><span class="dv">0</span>, stop<span class="op">=</span><span class="dv">10</span>, num<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb39-12"><a href="ode.html#cb39-12" aria-hidden="true"></a>y_analytic <span class="op">=</span> np.vectorize(pendulum_analytic)(x)</span>
+<span id="cb39-13"><a href="ode.html#cb39-13" aria-hidden="true"></a></span>
+<span id="cb39-14"><a href="ode.html#cb39-14" aria-hidden="true"></a>plt.plot(x, y_analytic)</span>
+<span id="cb39-15"><a href="ode.html#cb39-15" aria-hidden="true"></a>plt.show()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>В дифференциальной форме уравнение выглядит как:</p>
+<p><span class="math display">\[
+\ddot\theta + \frac{g}{l}\sin{\theta} = 0
+\]</span></p>
+<p>или</p>
+<p><span class="math display">\[
+\ddot\theta = -\frac{g}{l}\sin{\theta}
+\]</span></p>
+<p>интегрируя обе части получим</p>
+<p><span class="math display">\[
+\dot\theta = \int{-\frac{g}{l}\sin{\theta} \, dt}
+\]</span></p>
+<p>где <span class="math inline">\(\dot\theta\)</span> - это угловая скорость <span class="math inline">\(\omega\)</span> (угол <span class="math inline">\(\theta\)</span> -&gt; угловая скорость <span class="math inline">\(\dot\theta\)</span> -&gt; угловое ускорение <span class="math inline">\(\ddot\theta\)</span>).</p>
+<p>имея угловую скорость можно вычислить угол:</p>
+<p><span class="math display">\[
+\theta = \int{\omega \, dt}
+\]</span></p>
+<p>Переведем математику в питон:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="ode.html#cb40-1" aria-hidden="true"></a><span class="co"># state = [theta, omega]</span></span>
+<span id="cb40-2"><a href="ode.html#cb40-2" aria-hidden="true"></a><span class="co"># omega = theta&#39;</span></span>
+<span id="cb40-3"><a href="ode.html#cb40-3" aria-hidden="true"></a></span>
+<span id="cb40-4"><a href="ode.html#cb40-4" aria-hidden="true"></a>THETA_IDX <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb40-5"><a href="ode.html#cb40-5" aria-hidden="true"></a>OMEGA_IDX <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb40-6"><a href="ode.html#cb40-6" aria-hidden="true"></a><span class="kw">def</span> pendulum_state(state):</span>
+<span id="cb40-7"><a href="ode.html#cb40-7" aria-hidden="true"></a>    <span class="cf">return</span> np.array([</span>
+<span id="cb40-8"><a href="ode.html#cb40-8" aria-hidden="true"></a>        <span class="co"># находим угол через угловую скорость omega</span></span>
+<span id="cb40-9"><a href="ode.html#cb40-9" aria-hidden="true"></a>        state[OMEGA_IDX],</span>
+<span id="cb40-10"><a href="ode.html#cb40-10" aria-hidden="true"></a>        <span class="co"># находим угловую скорость</span></span>
+<span id="cb40-11"><a href="ode.html#cb40-11" aria-hidden="true"></a>        <span class="op">-</span> (_GRAVITY <span class="op">/</span> PENDULUM_VAR_LEN) <span class="op">*</span> math.sin(state[THETA_IDX])</span>
+<span id="cb40-12"><a href="ode.html#cb40-12" aria-hidden="true"></a>    ])</span>
+<span id="cb40-13"><a href="ode.html#cb40-13" aria-hidden="true"></a></span>
+<span id="cb40-14"><a href="ode.html#cb40-14" aria-hidden="true"></a>modified_euler_pend <span class="op">=</span> modified_euler_method(</span>
+<span id="cb40-15"><a href="ode.html#cb40-15" aria-hidden="true"></a>  np.array([PENDULUM_VAR_INITIAL_ANGLE, <span class="dv">0</span>]),</span>
+<span id="cb40-16"><a href="ode.html#cb40-16" aria-hidden="true"></a>  x,</span>
+<span id="cb40-17"><a href="ode.html#cb40-17" aria-hidden="true"></a>  pendulum_state)</span>
+<span id="cb40-18"><a href="ode.html#cb40-18" aria-hidden="true"></a></span>
+<span id="cb40-19"><a href="ode.html#cb40-19" aria-hidden="true"></a>plt.plot(x, modified_euler_pend[:,<span class="dv">0</span>])</span>
+<span id="cb40-20"><a href="ode.html#cb40-20" aria-hidden="true"></a>plt.show()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-13-3.png" width="672" /></p>
+<p>Выглядит похоже. Проведем еще один эксперимент: решим ОДУ для более длинного периода времени. До этого мы считали 10 секунд, теперь попробуем 100 секунд.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="ode.html#cb41-1" aria-hidden="true"></a>long_osc <span class="op">=</span> np.linspace(start<span class="op">=</span><span class="dv">0</span>, stop<span class="op">=</span><span class="dv">100</span>, num<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb41-2"><a href="ode.html#cb41-2" aria-hidden="true"></a>modified_euler_pend <span class="op">=</span> modified_euler_method(</span>
+<span id="cb41-3"><a href="ode.html#cb41-3" aria-hidden="true"></a>  np.array([PENDULUM_VAR_INITIAL_ANGLE, <span class="dv">0</span>]),</span>
+<span id="cb41-4"><a href="ode.html#cb41-4" aria-hidden="true"></a>  long_osc,</span>
+<span id="cb41-5"><a href="ode.html#cb41-5" aria-hidden="true"></a>  pendulum_state)</span>
+<span id="cb41-6"><a href="ode.html#cb41-6" aria-hidden="true"></a></span>
+<span id="cb41-7"><a href="ode.html#cb41-7" aria-hidden="true"></a>plt.plot(long_osc, modified_euler_pend[:,<span class="dv">0</span>])</span>
+<span id="cb41-8"><a href="ode.html#cb41-8" aria-hidden="true"></a>plt.show()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-14-5.png" width="672" /></p>
+<p>Теперь видно, что маятник раскачивается сильнее с каждым разом. Это связано с тем, что методом Эйлера мы можем аппроксимировать только линейные изменения, а у нас угловая скорость нелинейно зависит от синуса угла.</p>
+</div>
+<div id="метод-рунге-кутты" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Метод Рунге-Кутты<a href="ode.html#метод-рунге-кутты" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Чтобы решить проблему с нелинейным ускорением, нам нужен метод более высокого порядка. Таким методом является метод Рунге-Кутта.</p>
+<p><span class="math display">\[
+\begin{align*}
+y_{n+1} &amp; = y_{n} + \frac{h}{6}(k_1 + 2k_2 + 2k_3 + k_4) \\
+k_1 &amp; = f(x_n, y_n) \\
+k_2 &amp; = f(x_n + \frac{h}{2}, y_n + \frac{h}{2}k_1) \\
+k_3 &amp; = f(x_n + \frac{h}{2}, y_n + \frac{h}{2}k_2) \\
+k_4 &amp; = f(x_n + h, y_n + hk_3)
+\end{align*}
+\]</span></p>
+<p>Не обязательно глубоко погружаться в то почему метод работает, но можно заметить, что в Рунге-Кутты вычисляется значение не только в нечальной и конечно точках, а также делается подшаг <span class="math inline">\(h/2\)</span> для повышения точности.</p>
+<p>Запишем решение на Питоне:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="ode.html#cb42-1" aria-hidden="true"></a><span class="kw">def</span> runge_kutta_4(state, t, f):</span>
+<span id="cb42-2"><a href="ode.html#cb42-2" aria-hidden="true"></a>    result <span class="op">=</span> <span class="bu">list</span>()</span>
+<span id="cb42-3"><a href="ode.html#cb42-3" aria-hidden="true"></a>    prev_t <span class="op">=</span> t[<span class="dv">0</span>]</span>
+<span id="cb42-4"><a href="ode.html#cb42-4" aria-hidden="true"></a>    <span class="cf">for</span> t_current <span class="kw">in</span> t:</span>
+<span id="cb42-5"><a href="ode.html#cb42-5" aria-hidden="true"></a>        dt <span class="op">=</span> t_current <span class="op">-</span> prev_t</span>
+<span id="cb42-6"><a href="ode.html#cb42-6" aria-hidden="true"></a>        k1 <span class="op">=</span> f(state)</span>
+<span id="cb42-7"><a href="ode.html#cb42-7" aria-hidden="true"></a>        k2 <span class="op">=</span> f(state <span class="op">+</span> dt <span class="op">*</span> k1 <span class="op">/</span> <span class="dv">2</span>)</span>
+<span id="cb42-8"><a href="ode.html#cb42-8" aria-hidden="true"></a>        k3 <span class="op">=</span> f(state <span class="op">+</span> dt <span class="op">*</span> k2 <span class="op">/</span> <span class="dv">2</span>)</span>
+<span id="cb42-9"><a href="ode.html#cb42-9" aria-hidden="true"></a>        k4 <span class="op">=</span> f(state <span class="op">+</span> k3 <span class="op">*</span> dt )</span>
+<span id="cb42-10"><a href="ode.html#cb42-10" aria-hidden="true"></a>        prev_t <span class="op">=</span> t_current</span>
+<span id="cb42-11"><a href="ode.html#cb42-11" aria-hidden="true"></a></span>
+<span id="cb42-12"><a href="ode.html#cb42-12" aria-hidden="true"></a>        state <span class="op">=</span> state <span class="op">+</span> dt <span class="op">*</span> (k1 <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> k2 <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> k3 <span class="op">+</span> k4) <span class="op">/</span> <span class="dv">6</span></span>
+<span id="cb42-13"><a href="ode.html#cb42-13" aria-hidden="true"></a>        result.append(state)</span>
+<span id="cb42-14"><a href="ode.html#cb42-14" aria-hidden="true"></a></span>
+<span id="cb42-15"><a href="ode.html#cb42-15" aria-hidden="true"></a>    <span class="cf">return</span> np.array(result)</span>
+<span id="cb42-16"><a href="ode.html#cb42-16" aria-hidden="true"></a></span>
+<span id="cb42-17"><a href="ode.html#cb42-17" aria-hidden="true"></a>rk_pend <span class="op">=</span> runge_kutta_4(np.array([PENDULUM_VAR_INITIAL_ANGLE, <span class="dv">0</span>]), x, pendulum_state)</span>
+<span id="cb42-18"><a href="ode.html#cb42-18" aria-hidden="true"></a></span>
+<span id="cb42-19"><a href="ode.html#cb42-19" aria-hidden="true"></a>plt.plot(x, rk_pend[:,<span class="dv">0</span>])</span>
+<span id="cb42-20"><a href="ode.html#cb42-20" aria-hidden="true"></a>plt.show()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-15-7.png" width="672" /></p>
+<p>Выглядит похожим на аналитическое решение, также как и Эйлер. Проверим на большем промежутке времени:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="ode.html#cb43-1" aria-hidden="true"></a>rk_long_pend <span class="op">=</span> runge_kutta_4(np.array([PENDULUM_VAR_INITIAL_ANGLE, <span class="dv">0</span>]), long_osc, pendulum_state)</span>
+<span id="cb43-2"><a href="ode.html#cb43-2" aria-hidden="true"></a></span>
+<span id="cb43-3"><a href="ode.html#cb43-3" aria-hidden="true"></a>plt.plot(long_osc, rk_long_pend[:,<span class="dv">0</span>])</span>
+<span id="cb43-4"><a href="ode.html#cb43-4" aria-hidden="true"></a>plt.show()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-16-9.png" width="672" /></p>
+<p>Видно, что результат вычисляется намного более стабильно. Это значит, что метод Рунге-Кутты лучше аппроксимирует кривую за счет большего порядка и дает более приближенный к аналитической форме результат.</p>
+<p>Сравним ошибку через MAE (mean absolute error, средняя абсолютная ошибка).</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="ode.html#cb44-1" aria-hidden="true"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_absolute_error</span>
+<span id="cb44-2"><a href="ode.html#cb44-2" aria-hidden="true"></a></span>
+<span id="cb44-3"><a href="ode.html#cb44-3" aria-hidden="true"></a>y_analytic_long <span class="op">=</span> np.vectorize(pendulum_analytic)(long_osc)</span>
+<span id="cb44-4"><a href="ode.html#cb44-4" aria-hidden="true"></a></span>
+<span id="cb44-5"><a href="ode.html#cb44-5" aria-hidden="true"></a>compare_methods <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb44-6"><a href="ode.html#cb44-6" aria-hidden="true"></a>  {<span class="st">&quot;Method&quot;</span>: [</span>
+<span id="cb44-7"><a href="ode.html#cb44-7" aria-hidden="true"></a>    <span class="st">&quot;Modified Euler&quot;</span>,</span>
+<span id="cb44-8"><a href="ode.html#cb44-8" aria-hidden="true"></a>    <span class="st">&quot;Runge-Kutta&quot;</span></span>
+<span id="cb44-9"><a href="ode.html#cb44-9" aria-hidden="true"></a>  ],</span>
+<span id="cb44-10"><a href="ode.html#cb44-10" aria-hidden="true"></a>  <span class="st">&quot;MAE, rad&quot;</span>: [</span>
+<span id="cb44-11"><a href="ode.html#cb44-11" aria-hidden="true"></a>    mean_absolute_error(modified_euler_pend[:,<span class="dv">0</span>], y_analytic_long),</span>
+<span id="cb44-12"><a href="ode.html#cb44-12" aria-hidden="true"></a>    mean_absolute_error(rk_long_pend[:,<span class="dv">0</span>], y_analytic_long)</span>
+<span id="cb44-13"><a href="ode.html#cb44-13" aria-hidden="true"></a>  ]})</span>
+<span id="cb44-14"><a href="ode.html#cb44-14" aria-hidden="true"></a>compare_methods[<span class="st">&quot;MAE, deg&quot;</span>] <span class="op">=</span> compare_methods[<span class="st">&quot;MAE, rad&quot;</span>].<span class="bu">map</span>(np.rad2deg)</span>
+<span id="cb44-15"><a href="ode.html#cb44-15" aria-hidden="true"></a>compare_methods[<span class="st">&quot;change, %&quot;</span>] <span class="op">=</span> compare_methods[<span class="st">&quot;MAE, rad&quot;</span>].pct_change(periods<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb44-16"><a href="ode.html#cb44-16" aria-hidden="true"></a>compare_methods</span></code></pre></div>
+<pre><code>##            Method  MAE, rad  MAE, deg  change, %
+## 0  Modified Euler  0.077300  4.428935        NaN
+## 1     Runge-Kutta  0.001298  0.074391  -0.983203</code></pre>
+<p>Из таблицы видно что ошибка методом Рунге-Кутты ошибка на 98% меньше чем модифицированным методом Эйлера.</p>
+</div>
+<div id="решение-оду-с-помозью-scipy" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> Решение ОДУ с помозью SciPy<a href="ode.html#решение-оду-с-помозью-scipy" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Теперь посмотрим как решать ОДУ с помощью SciPy. Для ОДУ предназначены пакеты ode, odeint, solve_ivp. Используем odeint так как он ближе всего к нашим вычислениям по структуре. odeint ожидает функцию вычисления производной, но дополнительно к состоянию передается текущее время t и дополнительные аргументы (через параметр <code>args</code> в <code>odeint</code>).</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="ode.html#cb46-1" aria-hidden="true"></a><span class="im">from</span> scipy.integrate <span class="im">import</span> odeint</span>
+<span id="cb46-2"><a href="ode.html#cb46-2" aria-hidden="true"></a></span>
+<span id="cb46-3"><a href="ode.html#cb46-3" aria-hidden="true"></a><span class="kw">def</span> pend(y, t, pendulum_len):</span>
+<span id="cb46-4"><a href="ode.html#cb46-4" aria-hidden="true"></a>    theta, omega <span class="op">=</span> y</span>
+<span id="cb46-5"><a href="ode.html#cb46-5" aria-hidden="true"></a>    <span class="cf">return</span> [</span>
+<span id="cb46-6"><a href="ode.html#cb46-6" aria-hidden="true"></a>        omega,</span>
+<span id="cb46-7"><a href="ode.html#cb46-7" aria-hidden="true"></a>        <span class="op">-</span> (_GRAVITY <span class="op">/</span> pendulum_len) <span class="op">*</span> math.sin(theta)</span>
+<span id="cb46-8"><a href="ode.html#cb46-8" aria-hidden="true"></a>    ]</span>
+<span id="cb46-9"><a href="ode.html#cb46-9" aria-hidden="true"></a></span>
+<span id="cb46-10"><a href="ode.html#cb46-10" aria-hidden="true"></a>scipy_sol <span class="op">=</span> odeint(</span>
+<span id="cb46-11"><a href="ode.html#cb46-11" aria-hidden="true"></a>  <span class="co"># функция вычисления производной</span></span>
+<span id="cb46-12"><a href="ode.html#cb46-12" aria-hidden="true"></a>  pend,</span>
+<span id="cb46-13"><a href="ode.html#cb46-13" aria-hidden="true"></a>  <span class="co"># начальное значение</span></span>
+<span id="cb46-14"><a href="ode.html#cb46-14" aria-hidden="true"></a>  [PENDULUM_VAR_INITIAL_ANGLE, <span class="dv">0</span>],</span>
+<span id="cb46-15"><a href="ode.html#cb46-15" aria-hidden="true"></a>  <span class="co"># временные точки для которых надо решить ОДУ</span></span>
+<span id="cb46-16"><a href="ode.html#cb46-16" aria-hidden="true"></a>  long_osc,</span>
+<span id="cb46-17"><a href="ode.html#cb46-17" aria-hidden="true"></a>  <span class="co"># дополнительные аргументы для функции вычисления производной</span></span>
+<span id="cb46-18"><a href="ode.html#cb46-18" aria-hidden="true"></a>  args<span class="op">=</span>(PENDULUM_VAR_LEN,))</span>
+<span id="cb46-19"><a href="ode.html#cb46-19" aria-hidden="true"></a>plt.plot(long_osc, scipy_sol[:,<span class="dv">0</span>])</span>
+<span id="cb46-20"><a href="ode.html#cb46-20" aria-hidden="true"></a>plt.show()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-18-11.png" width="672" /></p>
+<p><code>odeint</code> использует алгоритм LSODA из фортрановской библиотеки <code>odepack</code>. Для указания конкретного алгоритма можно использовать модуль <code>solve_ivp</code> (но это за пределами этой статьи).</p>
+<p>Посчитаем ошибку между всеми методами:</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="ode.html#cb47-1" aria-hidden="true"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_absolute_error</span>
+<span id="cb47-2"><a href="ode.html#cb47-2" aria-hidden="true"></a></span>
+<span id="cb47-3"><a href="ode.html#cb47-3" aria-hidden="true"></a>y_analytic_long <span class="op">=</span> np.vectorize(pendulum_analytic)(long_osc)</span>
+<span id="cb47-4"><a href="ode.html#cb47-4" aria-hidden="true"></a></span>
+<span id="cb47-5"><a href="ode.html#cb47-5" aria-hidden="true"></a>compare_methods <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb47-6"><a href="ode.html#cb47-6" aria-hidden="true"></a>  {<span class="st">&quot;Method&quot;</span>: [</span>
+<span id="cb47-7"><a href="ode.html#cb47-7" aria-hidden="true"></a>    <span class="st">&quot;Modified Euler&quot;</span>,</span>
+<span id="cb47-8"><a href="ode.html#cb47-8" aria-hidden="true"></a>    <span class="st">&quot;Runge-Kutta&quot;</span>,</span>
+<span id="cb47-9"><a href="ode.html#cb47-9" aria-hidden="true"></a>    <span class="st">&quot;SciPy odeint (LSODA)&quot;</span></span>
+<span id="cb47-10"><a href="ode.html#cb47-10" aria-hidden="true"></a>  ],</span>
+<span id="cb47-11"><a href="ode.html#cb47-11" aria-hidden="true"></a>  <span class="st">&quot;MAE, rad&quot;</span>: [</span>
+<span id="cb47-12"><a href="ode.html#cb47-12" aria-hidden="true"></a>    mean_absolute_error(modified_euler_pend[:,<span class="dv">0</span>], y_analytic_long),</span>
+<span id="cb47-13"><a href="ode.html#cb47-13" aria-hidden="true"></a>    mean_absolute_error(rk_long_pend[:,<span class="dv">0</span>], y_analytic_long),</span>
+<span id="cb47-14"><a href="ode.html#cb47-14" aria-hidden="true"></a>    mean_absolute_error(scipy_sol[:,<span class="dv">0</span>], y_analytic_long)</span>
+<span id="cb47-15"><a href="ode.html#cb47-15" aria-hidden="true"></a>  ]})</span>
+<span id="cb47-16"><a href="ode.html#cb47-16" aria-hidden="true"></a>compare_methods[<span class="st">&quot;MAE, deg&quot;</span>] <span class="op">=</span> compare_methods[<span class="st">&quot;MAE, rad&quot;</span>].<span class="bu">map</span>(np.rad2deg)</span>
+<span id="cb47-17"><a href="ode.html#cb47-17" aria-hidden="true"></a>compare_methods[<span class="st">&quot;change, %&quot;</span>] <span class="op">=</span> compare_methods[<span class="st">&quot;MAE, rad&quot;</span>].pct_change(periods<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb47-18"><a href="ode.html#cb47-18" aria-hidden="true"></a>compare_methods</span></code></pre></div>
+<pre><code>##                  Method  MAE, rad  MAE, deg  change, %
+## 0        Modified Euler  0.077300  4.428935        NaN
+## 1           Runge-Kutta  0.001298  0.074391  -0.983203
+## 2  SciPy odeint (LSODA)  0.000896  0.051346  -0.309782</code></pre>
+<p>Видно что LSODA еще на 30% точнее чем Рунге-Кутта.</p>
+</div>
+<div id="почему-бы-не-использовать-аналитическую-форму-зачем-эти-приседания" class="section level2 hasAnchor" number="2.7">
+<h2><span class="header-section-number">2.7</span> Почему бы не использовать аналитическую форму? Зачем эти приседания?<a href="ode.html#почему-бы-не-использовать-аналитическую-форму-зачем-эти-приседания" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Есть несколько причин:</p>
+<ul>
+<li>не для каждого явления есть аналитическая формула. Более того, в примере с маятником аналитическое решение есть только для малых колебаний, когда можно сделать аппроксимацию <span class="math inline">\(sin(theta) \approx theta\)</span>, что справедливо для углов меньше 6 градусов. При этом в ОДУ форме можно получить численное решение для любых углов.</li>
+<li>аналитическое решение получается решением ОДУ (что не всегда возможно)</li>
+</ul>
+</div>
+<div id="stiffness-жесткость" class="section level2 hasAnchor" number="2.8">
+<h2><span class="header-section-number">2.8</span> stiffness (жесткость)<a href="ode.html#stiffness-жесткость" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Жёсткой системой обыкновенных дифференциальных уравнений (ОДУ) называется (нестрого говоря) такая система ОДУ, численное решение которой явными методами (например, методами Рунге — Кутты или Адамса) является неудовлетворительным из-за резкого увеличения числа вычислений (при малом шаге интегрирования) или из-за резкого возрастания погрешности (так называемого, взрыва погрешности) при недостаточно малом шаге. Для жёстких систем характерно то, что для них неявные методы дают лучший результат, обычно несравненно более хороший, чем явные методы.</p>
+<p>TK добавить пример жесткой системы</p>
+<p>Пример неявных методов:</p>
+<ul>
+<li>BDF (backward differentiation formula)</li>
+<li>LSODA: знакомый нам уже метод. Автоматическим определяет жесткость и переключает алгоритмы между Adams и BDF. Обертка над ODEPACK.</li>
+</ul>
+</div>
+<div id="многошаговые-методы" class="section level2 hasAnchor" number="2.9">
+<h2><span class="header-section-number">2.9</span> Многошаговые методы<a href="ode.html#многошаговые-методы" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Метод Рунге-Кутта делает подшаги (для rk - полушаг) чтобы получить метод большего порядка. Но такой подход не переиспользует уже произведенные вычисления на предыдущих шагах. Многошаговые методы переиспользуют вычисления с прошлых шагов, уменьшая количество вычислений. К ним относятся методы Адамса — Башфорта (Adams–Bashforth) 1,2,3,4 и 5 порядков.</p>
+<p>You can write citations, too. For example, we are using the <strong>bookdown</strong> package <span class="citation">(Xie <a href="#ref-R-bookdown" role="doc-biblioref">2022</a>)</span> in this sample book, which was built on top of R Markdown and <strong>knitr</strong> <span class="citation">(Xie <a href="#ref-xie2015" role="doc-biblioref">2015</a>)</span>.</p>
+
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references hanging-indent">
+<div id="ref-xie2015">
+<p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/">http://yihui.name/knitr/</a>.</p>
+</div>
+<div id="ref-R-bookdown">
+<p>Xie, Yihui. 2022. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://CRAN.R-project.org/package=bookdown">https://CRAN.R-project.org/package=bookdown</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="literature.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/01-ode.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
