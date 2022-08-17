@@ -17,6 +17,8 @@ jobs:
         with:
           image: ghcr.io/khamutov/sim_book:main
           options: -v ${{ github.workspace }}:/build/input
+          run: |
+            Rscript -e 'bookdown::render_book("/build/input")'
       - uses: actions/upload-artifact@v1
         with:
           name: _book
